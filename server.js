@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import axios from "axios";
+import dotenv from "dotenv";
 
 const app = express();
 const port = 3000;
@@ -8,11 +9,13 @@ const port = 3000;
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-const apiUrl = "http://localhost:4000"
-
 //Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+
+dotenv.config();
+
+const apiUrl = process.env.API_URL;
 
 //Get home page 
 app.get("/", async (req,res)=> {
